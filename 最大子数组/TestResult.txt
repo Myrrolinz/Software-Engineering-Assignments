@@ -1,0 +1,9 @@
+test_pipline (__main__.Testing)
+һά ... ok
+test_in (__main__.Testing) ... ok
+test_error (__main__.Testing) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.005s
+
+OK
