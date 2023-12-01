@@ -10,10 +10,10 @@ import numpy as np
 
 class MaxProduct:
     """
-    乘积最大子数组
+    Maximum Product Subarray
     """
     def __init__(self):
-        """初始化"""
+        """Initialize"""
         self.num=[]
         self.nums=[]
         self.max_dp=0
@@ -22,12 +22,12 @@ class MaxProduct:
         self.shape=0
 
     def set(self,in_num):
-        """赋值输入数组"""
+        """Assign input array"""
         self.nums=in_num
         self.shape=np.array(self.nums).ndim
 
     def calculate_list(self):
-        """计算乘积最大子数组的值"""
+        """Calculate the value of the maximum product subarray"""
         if len(self.num) <= 1:
             self.ans_dp=self.num[0]
         self.max_dp,self.min_dp,self.ans_dp = self.num[0],self.num[0],self.num[0]
@@ -38,7 +38,7 @@ class MaxProduct:
         return self.ans_dp
 
     def calculate(self):
-        """对输入数列处理后计算MP"""
+        """Calculate MP after processing the input sequence"""
         if self.shape==1:
             self.num=self.nums
             print(self.num)
@@ -54,31 +54,31 @@ class MaxProduct:
 
 
     def get_ans(self):
-        """返回计算结果"""
+        """Return the calculation result"""
         return self.ans_dp
 
 def pipline(input_nums):
-    """计算流水线"""
+    """Calculation pipeline"""
     my_mp=MaxProduct()
     my_mp.set(input_nums)
     return my_mp.calculate()
 
 def get_list(the_set):
     """
-    :param the_set: 要处理的集合
-    :return:最大的数
+    :param the_set: The set to be processed
+    :return: The largest number
     """
     return pipline(the_set)
 
 def get_in():
-    """获取输入数组
-       包括错误处理
+    """Get input array
+       Including error handling
     """
     inlist=[]
     try:
-        inlist=literal_eval(input("please input a One-dim Or Two-dim array："))
+        inlist=literal_eval(input("please input a One-dim Or Two-dim array: "))
     except (SyntaxError, ValueError):
-        print("error input！")
+        print("error input!")
     except TypeError:
         print("Format error!")
     if isinstance(inlist,tuple):
@@ -101,16 +101,16 @@ def get_in():
                     except AssertionError:
                         print("error input!")
         else:
-            print("本程序仅支持一维数组和二维数组")
+            print("This program only supports one-dim arrays and two-dim arrays")
             return TypeError
     else:
-        print("error input！")
+        print("error input! ")
         return TypeError
     return inlist
 
 
 if __name__=='__main__':
-    #获取一组数，用list存储
+    # Obtain a set of numbers and store them in a list
     nums=get_in()
-    """执行计算"""
+    """Perform calculation"""
     print(pipline(nums))
