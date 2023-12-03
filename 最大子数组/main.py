@@ -14,39 +14,39 @@ class MaxProduct:
     """
     def __init__(self):
         """Initialize"""
-        self.num=[]
-        self.nums=[]
-        self.max_dp=0
-        self.min_dp=0
-        self.ans_dp=0
-        self.shape=0
+        self.num = []
+        self.nums = []
+        self.max_dp = 0
+        self.min_dp = 0
+        self.ans_dp = 0
+        self.shape = 0
 
-    def set(self,in_num):
+    def set(self, in_num):
         """Assign input array"""
-        self.nums=in_num
-        self.shape=np.array(self.nums).ndim
+        self.nums = in_num
+        self.shape = np.array(self.nums).ndim
 
     def calculate_list(self):
         """Calculate the value of the maximum product subarray"""
         if len(self.num) <= 1:
-            self.ans_dp=self.num[0]
-        self.max_dp,self.min_dp,self.ans_dp = self.num[0],self.num[0],self.num[0]
+            self.ans_dp = self.num[0]
+        self.max_dp, self.min_dp, self.ans_dp = self.num[0], self.num[0], self.num[0]
         for i in range(1, len(self.num)):
-            self.max_dp,self.min_dp= max(self.max_dp * self.num[i], self.num[i], self.min_dp * self.num[i]),\
-                                     min(self.max_dp * self.num[i], self.num[i],self.min_dp * self.num[i])
+            self.max_dp, self.min_dp = max(self.max_dp * self.num[i], self.num[i], self.min_dp * self.num[i]),\
+                                     min(self.max_dp * self.num[i], self.num[i], self.min_dp * self.num[i])
             self.ans_dp = max(self.ans_dp, self.max_dp)
         return self.ans_dp
 
     def calculate(self):
         """Calculate MP after processing the input sequence"""
-        if self.shape==1:
-            self.num=self.nums
+        if self.shape == 1:
+            self.num = self.nums
             print(self.num)
             return self.calculate_list()
-        if self.shape==2:
-            ans_list=[]
+        if self.shape == 2:
+            ans_list = []
             for i in range(self.shape):
-                self.num=self.nums[i]
+                self.num = self.nums[i]
                 ans_list.append(self.calculate_list())
             return max(ans_list)
         print("Program error!")
@@ -59,7 +59,7 @@ class MaxProduct:
 
 def pipline(input_nums):
     """Calculation pipeline"""
-    my_mp=MaxProduct()
+    my_mp = MaxProduct()
     my_mp.set(input_nums)
     return my_mp.calculate()
 
@@ -74,30 +74,30 @@ def get_in():
     """Get input array
        Including error handling
     """
-    inlist=[]
+    inlist = []
     try:
-        inlist=literal_eval(input("please input a One-dim Or Two-dim array: "))
+        inlist = literal_eval(input("please input a One-dim Or Two-dim array: "))
     except (SyntaxError, ValueError):
         print("error input!")
     except TypeError:
         print("Format error!")
-    if isinstance(inlist,tuple):
-        inlist=list(inlist)
-    elif isinstance(inlist,int):
-        inlist=[inlist]
+    if isinstance(inlist, tuple):
+        inlist = list(inlist)
+    elif isinstance(inlist, int):
+        inlist = [inlist]
     elif isinstance(inlist, list):
-        temp=np.array(inlist)
+        temp = np.array(inlist)
         if len(temp.shape) == 1:
             for index in inlist:
                 try:
                     assert isinstance(index, (int, float))
                 except AssertionError:
                     print("error input!")
-        elif len(temp.shape)==2:
+        elif len(temp.shape) == 2:
             for index_1 in inlist:
                 for index_2 in index_1:
                     try:
-                        assert isinstance(index_2,(int,float))
+                        assert isinstance(index_2, (int, float))
                     except AssertionError:
                         print("error input!")
         else:
@@ -111,6 +111,6 @@ def get_in():
 
 if __name__=='__main__':
     # Obtain a set of numbers and store them in a list
-    nums=get_in()
+    nums = get_in()
     """Perform calculation"""
     print(pipline(nums))
